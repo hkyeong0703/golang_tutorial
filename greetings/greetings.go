@@ -27,6 +27,22 @@ func Hello(name string) (string, error) {
     //  return message, nil // nil meaning no error
 }
 
+// Hellos returns a map that associates each fo the named people with a greeting message.
+func Hellos(names []string) (map[string]string, error) {
+    // A amp to associate names with messages.
+    messages := make(map[string]string)
+
+    // Loop through the received slice of names, calling the Hello function to get a message fot each name.
+    for _, name := range names { // You don't need the index, so you use the Go blank identifier (an underscore) to ignore it.
+        message, err := Hello(name)
+        if err != nil {
+            return nil, err
+        }
+        // In the map, associate the retrieved message with the name.
+        messages[name] = message
+    }
+    return messages, nil
+} 
 
 // init sets initial values for variables used in the funtion.
 func init() {
